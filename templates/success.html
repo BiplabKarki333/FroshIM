@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+You have successfully registered!
+name: {{name}}
+sports: {% for sport in sports %}
+        {{sport}}
+        {% endfor %}
+  <form class="" action="/registrants" method="post">
+    <label for="submit">DO you want to see who else has registered?</label>
+     <input type="submit" name="submit" value="">
+  </form>
+{% endblock %}

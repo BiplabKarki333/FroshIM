@@ -8,7 +8,8 @@ SPORTS = ['Soccer', 'Volleyball', "Table_tennis"]
 conn = sqlite3.connect('registrants.db', check_same_thread = False)
 c = conn.cursor()
 
-c.execute('''CREATE TABLE registrants (email text, sport text)''')
+if not os.path.exists('registrants.db'):
+    c.execute('''CREATE TABLE registrants (email text, sport text)''')
 
 
 
@@ -37,8 +38,8 @@ def register():
         return render_template('failure.html', message = "Did you forget to choose a sport?")
     if sports not in SPORTS:
         return render_template('failure.html', message = "You are clever! But I caught you.")
-    if email in REGISTRANTS.keys():
-        return render_template('reregistration.html')
+    #if email in REGISTRANTS.keys():
+    #    return render_template('reregistration.html')
 
     c.execute("INSERT INTO registrants VALUES(?,?)",(email, sports))
     conn.commit()
